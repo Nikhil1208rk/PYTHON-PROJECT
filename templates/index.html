@@ -1,0 +1,226 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Smart Student Performance Analyzer</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <div class="container">
+
+        <!-- Header -->
+        <header class="header">
+            <span class="logo">STUDENT ANALYTICS</span>
+
+            <h1>
+                Smart Student
+                <span class="gradient-text">Performance Analyzer</span>
+            </h1>
+
+            <p class="subtitle">
+                Understand your academic performance and get personalized
+                recommendations to improve your learning routine.
+            </p>
+        </header>
+
+        <!-- Student Form -->
+        <form action="{{ url_for('analyze') }}" method="POST">
+
+            <!-- Section 1: Student Information -->
+            <section class="card">
+                <h2 class="section-title">
+                    01 — Student Information
+                </h2>
+
+                <div class="form-grid">
+
+                    <div class="field">
+                        <label for="name">Student Name</label>
+
+                        <input
+                            type="text"
+                            id="name"
+                            name="name"
+                            placeholder="Enter your name"
+                            required
+                        >
+                    </div>
+
+                    <div class="field">
+                        <label for="enrollment">Enrollment Number</label>
+
+                        <input
+                            type="text"
+                            id="enrollment"
+                            name="enrollment"
+                            placeholder="Enter enrollment number"
+                            required
+                        >
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- Section 2: Academic Performance -->
+            <section class="card">
+                <h2 class="section-title">
+                    02 — Academic Performance
+                </h2>
+
+                <p class="helper">
+                    Enter the marks obtained in each subject, out of 100.
+                </p>
+
+                <div class="form-grid">
+
+                    <div class="field">
+                        <label for="python">Python Marks</label>
+
+                        <input
+                            type="number"
+                            id="python"
+                            name="python"
+                            min="0"
+                            max="100"
+                            step="1"
+                            placeholder="e.g. 85"
+                            required
+                        >
+                    </div>
+
+                    <div class="field">
+                        <label for="webdev">Web Development Marks</label>
+
+                        <input
+                            type="number"
+                            id="webdev"
+                            name="webdev"
+                            min="0"
+                            max="100"
+                            step="1"
+                            placeholder="e.g. 78"
+                            required
+                        >
+                    </div>
+
+                    <div class="field">
+                        <label for="dsa">DSA Marks</label>
+
+                        <input
+                            type="number"
+                            id="dsa"
+                            name="dsa"
+                            min="0"
+                            max="100"
+                            step="1"
+                            placeholder="e.g. 72"
+                            required
+                        >
+                    </div>
+
+                    <div class="field">
+                        <label for="calculus">Calculus Marks</label>
+
+                        <input
+                            type="number"
+                            id="calculus"
+                            name="calculus"
+                            min="0"
+                            max="100"
+                            step="1"
+                            placeholder="e.g. 68"
+                            required
+                        >
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- Section 3: Study Habits -->
+            <section class="card">
+                <h2 class="section-title">
+                    03 — Study Habits
+                </h2>
+
+                <p class="helper">
+                    Enter your daily routine details for personalized feedback.
+                </p>
+
+                <div class="form-grid">
+
+                    <div class="field">
+                        <label for="study_hours">
+                            Daily Study Hours
+                        </label>
+
+                        <input
+                            type="number"
+                            id="study_hours"
+                            name="study_hours"
+                            min="0"
+                            max="24"
+                            step="0.5"
+                            placeholder="e.g. 3"
+                            required
+                        >
+                    </div>
+
+                    <div class="field">
+                        <label for="attendance">
+                            Attendance (%)
+                        </label>
+
+                        <input
+                            type="number"
+                            id="attendance"
+                            name="attendance"
+                            min="0"
+                            max="100"
+                            step="0.1"
+                            placeholder="e.g. 85"
+                            required
+                        >
+                    </div>
+
+                    <div class="field">
+                        <label for="sleep_hours">
+                            Daily Sleep Hours
+                        </label>
+
+                        <input
+                            type="number"
+                            id="sleep_hours"
+                            name="sleep_hours"
+                            min="0"
+                            max="24"
+                            step="0.5"
+                            placeholder="e.g. 8"
+                            required
+                        >
+                    </div>
+
+                </div>
+
+                <!-- Submit Button -->
+                <button class="button" type="submit">
+                    Analyze My Performance →
+                </button>
+
+            </section>
+
+        </form>
+
+        <!-- Footer -->
+        <footer class="footer">
+            Smart Student Performance Analyzer · Python + Flask
+        </footer>
+
+    </div>
+</body>
+</html>

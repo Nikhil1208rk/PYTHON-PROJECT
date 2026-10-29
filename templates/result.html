@@ -1,0 +1,257 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Student Performance Dashboard</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+    <link rel="stylesheet"
+          href="{{ url_for(
+              'dashboard_css',
+              attendance=attendance,
+              python=marks['Python'],
+              webdev=marks['Web Development'],
+              dsa=marks['DSA'],
+              calculus=marks['Calculus']
+          ) }}">
+</head>
+
+<body>
+<div class="container">
+
+    <header class="header">
+        <span class="logo">PERFORMANCE REPORT</span>
+        <h1>Your Academic <span class="gradient-text">Dashboard</span></h1>
+        <p class="subtitle">
+            Track your academic progress and improve your performance.
+        </p>
+    </header>
+
+    <!-- Student Information -->
+    <section class="card">
+        <h2 class="section-title">Hello, {{ name }}!</h2>
+        <p><strong>Enrollment Number:</strong> {{ enrollment }}</p>
+    </section>
+
+    <!-- Main Statistics -->
+    <div class="stats-grid">
+
+        <div class="stat-card">
+            <div class="stat-label">Overall Percentage</div>
+            <div class="stat-value">{{ overall_percentage }}%</div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-label">Performance Status</div>
+            <div class="stat-value status-value">{{ status }}</div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-label">Attendance</div>
+            <div class="stat-value">{{ attendance }}%</div>
+        </div>
+
+    </div>
+
+    <!-- Total Marks Summary -->
+    <section class="card">
+        <h2 class="section-title">Total Marks Summary</h2>
+
+        <div class="total-summary">
+            <div class="stat-label">Marks Obtained</div>
+
+            <div class="total-number">
+                {{ total_marks }} / {{ max_total_marks }}
+            </div>
+
+            <p>Overall Percentage: {{ overall_percentage }}%</p>
+
+            <div class="progress-track">
+                <div class="progress-fill"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pie Charts -->
+    <div class="charts-grid">
+
+        <!-- Attendance Pie Chart -->
+        <section class="chart-card">
+            <h2 class="section-title">Attendance Analysis</h2>
+            <p class="helper">
+                Attendance compared with the remaining percentage.
+            </p>
+
+            <div class="pie-wrap">
+                <div class="pie-chart attendance-chart"></div>
+
+                <div class="chart-center">
+                    <strong>{{ attendance }}%</strong>
+                    <span>Attendance</span>
+                </div>
+            </div>
+
+            <div class="chart-legend">
+
+                <div class="legend-item">
+                    <span class="legend-name">
+                        <span class="legend-dot attendance-dot"></span>
+                        Attendance
+                    </span>
+                    <strong>{{ attendance }}%</strong>
+                </div>
+
+                <div class="legend-item">
+                    <span class="legend-name">
+                        <span class="legend-dot remaining-dot"></span>
+                        Remaining
+                    </span>
+                    <strong>{{ (100 - attendance)|round(2) }}%</strong>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Subject Marks Pie Chart -->
+        <section class="chart-card">
+            <h2 class="section-title">Subject Marks Distribution</h2>
+            <p class="helper">
+                Each slice represents a subject's share of total marks.
+            </p>
+
+            <div class="pie-wrap">
+                <div class="pie-chart subject-chart"></div>
+
+                <div class="chart-center">
+                    <strong>{{ total_marks }}</strong>
+                    <span>Total Marks</span>
+                </div>
+            </div>
+
+            <div class="chart-legend">
+
+                {% for subject, score in marks.items() %}
+                <div class="legend-item">
+
+                    <span class="legend-name">
+                        {% if subject == "Python" %}
+                            <span class="legend-dot python-dot"></span>
+                        {% elif subject == "Web Development" %}
+                            <span class="legend-dot webdev-dot"></span>
+                        {% elif subject == "DSA" %}
+                            <span class="legend-dot dsa-dot"></span>
+                        {% else %}
+                            <span class="legend-dot calculus-dot"></span>
+                        {% endif %}
+
+                        {{ subject }}
+                    </span>
+
+                    <strong>
+                        {{ score }} (
+                        {% if total_marks > 0 %}
+                            {{ (score / total_marks * 100)|round(1) }}%
+                        {% else %}
+                            0%
+                        {% endif %}
+                        )
+                    </strong>
+
+                </div>
+                {% endfor %}
+
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Subject-wise Performance -->
+    <section class="card">
+        <h2 class="section-title">Subject-wise Performance</h2>
+
+        <div class="table-wrap">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Subject</th>
+                        <th>Marks</th>
+                        <th>Percentage</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for subject, score in marks.items() %}
+                    <tr>
+                        <td>{{ subject }}</td>
+                        <td>{{ score }} / 100</td>
+                        <td>{{ score }}%</td>
+
+                        <td>
+                            {% if score >= 80 %}
+                                <span class="status-pill excellent">Excellent</span>
+                            {% elif score >= 60 %}
+                                <span class="status-pill good">Good</span>
+                            {% elif score >= 40 %}
+                                <span class="status-pill average">Average</span>
+                            {% else %}
+                                <span class="status-pill needs-work">Needs Improvement</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- Highest and Lowest Subjects -->
+    <div class="stats-grid">
+
+        <div class="stat-card">
+            <div class="stat-label">Highest Scoring Subject</div>
+            <div class="stat-value">{{ highest_subject }}</div>
+            <p>{{ highest_marks }} / 100</p>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-label">Lowest Scoring Subject</div>
+            <div class="stat-value">{{ lowest_subject }}</div>
+            <p>{{ lowest_marks }} / 100</p>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-label">Daily Study Hours</div>
+            <div class="stat-value">{{ study_hours }} hrs</div>
+            <p>Sleep: {{ sleep_hours }} hrs/day</p>
+        </div>
+
+    </div>
+
+    <!-- Recommendations -->
+    <section class="card">
+        <h2 class="section-title">Personalized Recommendations</h2>
+
+        <ul class="recommendations">
+            {% for recommendation in recommendations %}
+            <li>{{ recommendation }}</li>
+            {% endfor %}
+        </ul>
+    </section>
+
+    <a href="{{ url_for('home') }}" class="button back-button">
+        Analyze Again
+    </a>
+
+    <footer class="footer">
+        Smart Student Performance Analyzer | Python + Flask
+    </footer>
+
+</div>
+</body>
+</html>
