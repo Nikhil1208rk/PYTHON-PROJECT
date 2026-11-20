@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Student Performance Analyzer</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="brand">
+            <div class="brand-icon">Py</div>
+
+            <div>
+                <h2>STUDENT<span>_ANALYZER</span></h2>
+                <small>ACADEMIC INTELLIGENCE SYSTEM</small>
+            </div>
+        </div>
+
+        <div class="nav-status">
+            <span class="live-dot"></span>
+            PYTHON ENGINE READY
+        </div>
+    </nav>
+
+
+    <main class="container">
+
+        <!-- HERO SECTION -->
+        <section class="hero">
+
+            <div class="terminal-tag">
+                <span>01</span>
+                PERFORMANCE ANALYTICS
+            </div>
+
+            <h1>
+                Analyze your <br>
+                <span class="gradient-text">Academic Performance.</span>
+            </h1>
+
+            <p class="subtitle">
+                Enter your academic details and let our Python-powered
+                analysis engine evaluate your performance, study habits
+                and improvement areas.
+            </p>
+
+            <div class="tech-stack">
+                <span>PYTHON</span>
+                <span>HTML</span>
+                <span>CSS</span>
+                <span>JAVASCRIPT</span>
+            </div>
+
+        </section>
+
+
+        <!-- MAIN CONTENT -->
+        <section class="main-layout">
+
+            <!-- STUDENT FORM -->
+            <div class="card form-card">
+
+                <div class="section-heading">
+                    <div>
+                        <span class="section-number">01 / INPUT</span>
+                        <h2>Student Information</h2>
+                    </div>
+
+                    <span class="code-label">INPUT_DATA</span>
+                </div>
+
+
+                <form id="studentForm">
+
+                    <!-- PERSONAL DETAILS -->
+                    <div class="form-section-title">
+                        <span class="section-dot"></span>
+                        PERSONAL DETAILS
+                    </div>
+
+                    <div class="form-grid">
+
+                        <div class="field">
+                            <label for="name">FULL NAME</label>
+                            <input type="text" id="name" name="name" placeholder="e.g. John Doe" autocomplete="name" required>
+                        </div>
+
+                        <div class="field">
+                            <label for="enrollment">ENROLLMENT NUMBER</label>
+                            <input type="text" id="enrollment" name="enrollment" placeholder="e.g. EN2024001" autocomplete="off" required>
+                        </div>
+
+                    </div>
+
+
+                    <!-- SUBJECT MARKS -->
+                    <div class="form-section-title">
+                        <span class="section-dot blue"></span>
+                        ACADEMIC PERFORMANCE
+                    </div>
+
+                    <p class="helper">
+                        Enter your marks out of 100 for each subject.
+                    </p>
+
+                    <div class="form-grid">
+
+                        <div class="field">
+                            <label for="python">PYTHON</label>
+                            <input type="number" id="python" name="Python" placeholder="0 - 100" min="0" max="100"
+                                step="0.01" required>
+                        </div>
+
+                        <div class="field">
+                            <label for="web_development">WEB DEVELOPMENT</label>
+                            <input type="number" id="web_development" name="Web Development" placeholder="0 - 100"
+                                min="0" max="100" step="0.01" required>
+                        </div>
+
+                        <div class="field">
+                            <label for="dsa">DATA STRUCTURES &amp; ALGORITHMS</label>
+                            <input type="number" id="dsa" name="DSA" placeholder="0 - 100" min="0" max="100" step="0.01"
+                                required>
+                        </div>
+
+                        <div class="field">
+                            <label for="calculus">CALCULUS</label>
+                            <input type="number" id="calculus" name="Calculus" placeholder="0 - 100" min="0" max="100"
+                                step="0.01" required>
+                        </div>
+
+                    </div>
+
+
+                    <!-- STUDY HABITS -->
+                    <div class="form-section-title">
+                        <span class="section-dot purple"></span>
+                        STUDY HABITS
+                    </div>
+
+                    <div class="form-grid">
+
+                        <div class="field">
+                            <label for="attendance">ATTENDANCE (%)</label>
+                            <input type="number" id="attendance" name="attendance" placeholder="e.g. 85" min="0"
+                                max="100" step="0.01" required>
+                        </div>
+
+                        <div class="field">
+                            <label for="study_hours">DAILY STUDY HOURS</label>
+                            <input type="number" id="study_hours" name="study_hours" placeholder="e.g. 4" min="0"
+                                max="24" step="0.5" required>
+                        </div>
+
+                        <div class="field">
+                            <label for="sleep_hours">DAILY SLEEP HOURS</label>
+                            <input type="number" id="sleep_hours" name="sleep_hours" placeholder="e.g. 7" min="0"
+                                max="24" step="0.5" required>
+                        </div>
+
+                    </div>
+
+
+                    <!-- ERROR MESSAGE -->
+                    <div id="errorMessage" class="error-message"></div>
+
+
+                    <!-- SUBMIT BUTTON -->
+                    <button type="submit" class="button" id="analyzeButton">
+                        <span>RUN PERFORMANCE ANALYSIS</span>
+                        <span class="button-arrow">→</span>
+                    </button>
+
+                    <p class="form-note">
+                        <span class="live-dot"></span>
+                        Data is evaluated securely by your local Python server.
+                    </p>
+
+                </form>
+
+            </div>
+
+
+            <!-- SIDE PANEL -->
+            <aside class="side-panel">
+
+                <div class="info-card">
+                    <div class="info-icon">ℹ</div>
+                    <h3>How it works</h3>
+                    <p>
+                        Your marks and routine are analyzed by the Python backend
+                        using rule-based performance logic and academic habits evaluation.
+                    </p>
+
+                    <div class="mini-info">
+                        <span>01</span> Enter student details &amp; marks
+                    </div>
+
+                    <div class="mini-info">
+                        <span>02</span> Python calculates metrics &amp; distributions
+                    </div>
+
+                    <div class="mini-info">
+                        <span>03</span> View dashboard &amp; download CSV report
+                    </div>
+                </div>
+
+                <div class="info-card">
+                    <div class="info-icon">★</div>
+                    <h3>Grading Criteria</h3>
+                    <p>
+                        Academic performance benchmarks applied during calculation:
+                    </p>
+
+                    <div class="criteria-list">
+                        <div class="criteria-row">
+                            <span>Excellent</span>
+                            <span class="criteria-score">&gt;= 85%</span>
+                        </div>
+                        <div class="criteria-row">
+                            <span>Good</span>
+                            <span class="criteria-score">70% - 84%</span>
+                        </div>
+                        <div class="criteria-row">
+                            <span>Average</span>
+                            <span class="criteria-score">50% - 69%</span>
+                        </div>
+                        <div class="criteria-row">
+                            <span>Needs Improvement</span>
+                            <span class="criteria-score">&lt; 50%</span>
+                        </div>
+                    </div>
+                </div>
+
+            </aside>
+
+        </section>
+
+
+        <!-- FOOTER -->
+        <footer class="footer">
+            <span>STUDENT_ANALYZER v1.0</span>
+            <span>POWERED BY PYTHON</span>
+        </footer>
+
+    </main>
+
+
+    <!-- JAVASCRIPT -->
+    <script src="app.js"></script>
+
+</body>
+
+</html>

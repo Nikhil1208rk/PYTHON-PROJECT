@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Performance Dashboard | Student Analyzer</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="brand">
+            <div class="brand-icon">Py</div>
+
+            <div>
+                <h2>STUDENT<span>_ANALYZER</span></h2>
+                <small>ACADEMIC INTELLIGENCE SYSTEM</small>
+            </div>
+        </div>
+
+        <div class="nav-status">
+            <span class="live-dot"></span>
+            ANALYSIS COMPLETE
+        </div>
+    </nav>
+
+
+    <main class="container result-container">
+
+        <!-- HEADER -->
+        <section class="result-hero">
+
+            <div class="terminal-tag">
+                <span>02</span>
+                PERFORMANCE REPORT
+            </div>
+
+            <h1>
+                Your Academic
+                <span class="gradient-text">Dashboard.</span>
+            </h1>
+
+            <p class="subtitle">
+                Your student data has been processed by the Python
+                analysis engine. Here is your academic performance report.
+            </p>
+
+        </section>
+
+
+        <!-- STUDENT DETAILS -->
+        <section class="student-card">
+
+            <div class="student-avatar" id="studentInitial">S</div>
+
+            <div class="student-details">
+                <span class="section-number">STUDENT PROFILE</span>
+                <h2 id="studentName">Student Name</h2>
+                <p id="studentEnrollment">Enrollment Number</p>
+            </div>
+
+            <div class="status-pill" id="performanceStatus">
+                ANALYZED
+            </div>
+
+        </section>
+
+
+        <!-- PERFORMANCE STATS -->
+        <section class="stats-grid">
+
+            <div class="stat-card">
+                <span class="stat-label">OVERALL PERCENTAGE</span>
+                <div class="stat-value" id="percentageValue">0%</div>
+                <span class="stat-note">Academic performance</span>
+            </div>
+
+            <div class="stat-card">
+                <span class="stat-label">TOTAL MARKS</span>
+                <div class="stat-value" id="totalMarks">0/400</div>
+                <span class="stat-note">Across four subjects</span>
+            </div>
+
+            <div class="stat-card">
+                <span class="stat-label">STRONGEST SUBJECT</span>
+                <div class="stat-value stat-subject" id="strongestSubject">--</div>
+                <span class="stat-note">Your best performing subject</span>
+            </div>
+
+            <div class="stat-card">
+                <span class="stat-label">NEEDS IMPROVEMENT</span>
+                <div class="stat-value stat-subject" id="weakestSubject">--</div>
+                <span class="stat-note">Focus on this subject</span>
+            </div>
+
+        </section>
+
+
+        <!-- OVERALL PROGRESS -->
+        <section class="card total-summary">
+
+            <div class="summary-top">
+                <div>
+                    <span class="section-number">PERFORMANCE OVERVIEW</span>
+                    <h2>Overall Progress</h2>
+                </div>
+
+                <span class="summary-percent" id="progressLabel">0%</span>
+            </div>
+
+            <div class="progress-track">
+                <div class="progress-fill" id="overallProgress"></div>
+            </div>
+
+            <div class="summary-bottom">
+                <span>0%</span>
+                <span>100%</span>
+            </div>
+
+        </section>
+
+
+        <!-- CHARTS -->
+        <section class="charts-grid">
+
+            <!-- ATTENDANCE CHART -->
+            <div class="card chart-card">
+
+                <div class="section-heading">
+                    <div>
+                        <span class="section-number">01 / ATTENDANCE</span>
+                        <h2>Attendance Analysis</h2>
+                    </div>
+                </div>
+
+                <div class="pie-wrap">
+
+                    <div class="pie-chart attendance-chart" id="attendanceChart">
+                        <div class="chart-center">
+                            <strong id="attendanceValue">0%</strong>
+                            <span>ATTENDANCE</span>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="chart-legend">
+
+                    <div class="legend-item">
+                        <span class="legend-dot attendance-dot"></span>
+                        Present
+                        <strong id="presentValue">0%</strong>
+                    </div>
+
+                    <div class="legend-item">
+                        <span class="legend-dot remaining-dot"></span>
+                        Remaining
+                        <strong id="remainingValue">0%</strong>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- SUBJECT CHART -->
+            <div class="card chart-card">
+
+                <div class="section-heading">
+                    <div>
+                        <span class="section-number">02 / SUBJECTS</span>
+                        <h2>Marks Distribution</h2>
+                    </div>
+                </div>
+
+                <div class="pie-wrap">
+
+                    <div class="pie-chart subject-chart" id="subjectChart">
+                        <div class="chart-center">
+                            <strong>400</strong>
+                            <span>TOTAL MARKS</span>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="chart-legend" id="subjectLegend"></div>
+
+            </div>
+
+        </section>
+
+
+        <!-- SUBJECT PERFORMANCE TABLE -->
+        <section class="card table-card">
+
+            <div class="section-heading">
+                <div>
+                    <span class="section-number">03 / DETAILED REPORT</span>
+                    <h2>Subject-wise Performance</h2>
+                </div>
+
+                <span class="code-label">MARKS_OUT_OF_100</span>
+            </div>
+
+            <div class="table-wrap">
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>SUBJECT</th>
+                            <th>MARKS</th>
+                            <th>PROGRESS</th>
+                            <th>STATUS</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="subjectTableBody"></tbody>
+                </table>
+
+            </div>
+
+        </section>
+
+
+        <!-- STUDY HABITS -->
+        <section class="card habits-card">
+
+            <div class="section-heading">
+                <div>
+                    <span class="section-number">04 / DAILY ROUTINE</span>
+                    <h2>Study Habit Analysis</h2>
+                </div>
+            </div>
+
+            <div class="habit-grid">
+
+                <div class="habit-item">
+                    <span class="habit-icon">⏱</span>
+                    <div>
+                        <span>DAILY STUDY TIME</span>
+                        <strong id="studyHours">0 Hours</strong>
+                    </div>
+                </div>
+
+                <div class="habit-item">
+                    <span class="habit-icon">☾</span>
+                    <div>
+                        <span>DAILY SLEEP TIME</span>
+                        <strong id="sleepHours">0 Hours</strong>
+                    </div>
+                </div>
+
+                <div class="habit-item">
+                    <span class="habit-icon">✓</span>
+                    <div>
+                        <span>ATTENDANCE</span>
+                        <strong id="habitAttendance">0%</strong>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="habit-observations" id="habitObservations"></div>
+
+        </section>
+
+
+        <!-- RECOMMENDATIONS -->
+        <section class="card recommendations-card">
+
+            <div class="section-heading">
+                <div>
+                    <span class="section-number">05 / RECOMMENDATIONS</span>
+                    <h2>Personalized Guidance</h2>
+                </div>
+            </div>
+
+            <div class="recommendations" id="recommendationsList"></div>
+
+        </section>
+
+
+        <!-- ACTION BUTTONS -->
+        <section class="action-buttons">
+
+            <button class="secondary-button" onclick="window.location.href='index.html'">
+                ← ANALYZE ANOTHER STUDENT
+            </button>
+
+            <button class="button download-button" id="downloadButton">
+                <span>DOWNLOAD REPORT</span>
+                <span class="button-arrow">↓</span>
+            </button>
+
+        </section>
+
+
+        <!-- FOOTER -->
+        <footer class="footer">
+            <span>STUDENT_ANALYZER v1.0</span>
+            <span>REPORT GENERATED BY PYTHON</span>
+        </footer>
+
+    </main>
+
+
+    <!-- DASHBOARD JAVASCRIPT -->
+    <script>
+
+        // ==================================
+        // GET DATA FROM SESSION STORAGE
+        // ==================================
+
+        const savedData = sessionStorage.getItem("studentResult");
+
+        if (!savedData) {
+
+            alert("No student data found. Please submit the form first.");
+            window.location.href = "index.html";
+
+        } else {
+
+            const result = JSON.parse(savedData);
+            const performance = result.performance;
+            const marks = result.marks;
+
+            // Helper to get consistent status class
+            function getStatusClass(percentage) {
+                if (percentage >= 85) return "excellent";
+                if (percentage >= 70) return "good";
+                if (percentage >= 50) return "average";
+                return "needs-work";
+            }
+
+            // Helper to format numbers cleanly without floating point artifacts
+            function formatNumber(num) {
+                const val = Number(num);
+                if (isNaN(val)) return "0";
+                return Number.isInteger(val) ? val.toString() : val.toFixed(1);
+            }
+
+            // ==================================
+            // STUDENT INFORMATION
+            // ==================================
+
+            document.getElementById("studentName").textContent = result.name || "Student";
+            document.getElementById("studentEnrollment").textContent = result.enrollment || "--";
+            document.getElementById("studentInitial").textContent = (result.name || "S").charAt(0).toUpperCase();
+
+            // Status pill styling
+            const statusElem = document.getElementById("performanceStatus");
+            statusElem.textContent = performance.status;
+            statusElem.className = "status-pill " + getStatusClass(performance.percentage);
+
+
+            // ==================================
+            // PERFORMANCE STATISTICS
+            // ==================================
+
+            document.getElementById("percentageValue").textContent =
+                formatNumber(performance.percentage) + "%";
+
+            document.getElementById("totalMarks").textContent =
+                formatNumber(performance.total) + "/" + performance.maximum;
+
+            // Check if all subject marks are equal
+            const markValues = Object.values(marks);
+            const isAllEqual = markValues.length > 0 && markValues.every(v => v === markValues[0]);
+
+            if (isAllEqual) {
+                document.getElementById("strongestSubject").textContent = "Consistent in all";
+                document.getElementById("weakestSubject").textContent = "None (Equal scores)";
+            } else {
+                document.getElementById("strongestSubject").textContent = performance.strongest;
+                document.getElementById("weakestSubject").textContent = performance.weakest;
+            }
+
+
+            // ==================================
+            // OVERALL PROGRESS BAR
+            // ==================================
+
+            document.getElementById("progressLabel").textContent =
+                formatNumber(performance.percentage) + "%";
+
+            // Trigger animation after render
+            setTimeout(() => {
+                const pct = Math.min(100, Math.max(0, performance.percentage));
+                document.getElementById("overallProgress").style.width = pct + "%";
+            }, 50);
+
+
+            // ==================================
+            // ATTENDANCE CHART (Clean Solid Colors)
+            // ==================================
+
+            const attendance = Math.min(100, Math.max(0, Number(result.attendance) || 0));
+
+            document.getElementById("attendanceValue").textContent =
+                formatNumber(attendance) + "%";
+
+            document.getElementById("presentValue").textContent =
+                formatNumber(attendance) + "%";
+
+            document.getElementById("remainingValue").textContent =
+                formatNumber(100 - attendance) + "%";
+
+            // Solid clean emerald for present, clean light gray track for remaining
+            document.getElementById("attendanceChart").style.background =
+                `conic-gradient(
+                    #059669 0% ${attendance}%,
+                    #e2e8f0 ${attendance}% 100%
+                )`;
+
+
+            // ==================================
+            // SUBJECT CHART (Clean Professional Palette)
+            // ==================================
+
+            const subjectNames = Object.keys(marks);
+
+            // Clean, harmonious, non-neon subject palette
+            const subjectColors = [
+                "#4338ca", // Indigo
+                "#0284c7", // Sky Blue
+                "#059669", // Emerald
+                "#d97706"  // Amber
+            ];
+
+            let currentPercentage = 0;
+            let gradientParts = [];
+
+            subjectNames.forEach((subject, index) => {
+                const score = Number(marks[subject]) || 0;
+                const percentage = (score / 400) * 100;
+                const nextPercentage = currentPercentage + percentage;
+
+                if (percentage > 0) {
+                    const color = subjectColors[index % subjectColors.length];
+                    gradientParts.push(
+                        `${color} ${currentPercentage.toFixed(2)}% ${nextPercentage.toFixed(2)}%`
+                    );
+                }
+
+                currentPercentage = nextPercentage;
+            });
+
+            // Fill remaining track for unearned marks out of 400
+            if (currentPercentage < 100) {
+                gradientParts.push(
+                    `#e2e8f0 ${currentPercentage.toFixed(2)}% 100%`
+                );
+            }
+
+            if (gradientParts.length === 0) {
+                gradientParts.push("#e2e8f0 0% 100%");
+            }
+
+            document.getElementById("subjectChart").style.background =
+                `conic-gradient(${gradientParts.join(", ")})`;
+
+
+            // ==================================
+            // SUBJECT LEGEND
+            // ==================================
+
+            const subjectLegend = document.getElementById("subjectLegend");
+
+            subjectNames.forEach((subject, index) => {
+                const item = document.createElement("div");
+                item.className = "legend-item";
+
+                const dot = document.createElement("span");
+                dot.className = "legend-dot";
+                dot.style.background = subjectColors[index % subjectColors.length];
+
+                const name = document.createElement("span");
+                name.textContent = subject;
+
+                const score = document.createElement("strong");
+                score.textContent = formatNumber(marks[subject]) + "/100";
+
+                item.append(dot, name, score);
+                subjectLegend.appendChild(item);
+            });
+
+
+            // ==================================
+            // SUBJECT PERFORMANCE TABLE
+            // ==================================
+
+            const tableBody = document.getElementById("subjectTableBody");
+
+            subjectNames.forEach(subject => {
+                const score = Number(marks[subject]) || 0;
+
+                let status = "";
+                let statusClass = "";
+
+                if (score >= 85) {
+                    status = "Excellent";
+                    statusClass = "excellent";
+                } else if (score >= 70) {
+                    status = "Good";
+                    statusClass = "good";
+                } else if (score >= 50) {
+                    status = "Average";
+                    statusClass = "average";
+                } else {
+                    status = "Needs Work";
+                    statusClass = "needs-work";
+                }
+
+                const row = document.createElement("tr");
+
+                const subjectCell = document.createElement("td");
+                subjectCell.textContent = subject;
+
+                const marksCell = document.createElement("td");
+                marksCell.textContent = formatNumber(score) + " / 100";
+
+                const progressCell = document.createElement("td");
+                const progressTrack = document.createElement("div");
+                progressTrack.className = "table-progress";
+
+                const progressFill = document.createElement("div");
+                progressFill.style.width = Math.min(100, Math.max(0, score)) + "%";
+
+                progressTrack.appendChild(progressFill);
+                progressCell.appendChild(progressTrack);
+
+                const statusCell = document.createElement("td");
+                const badge = document.createElement("span");
+                badge.className = "status-pill " + statusClass;
+                badge.textContent = status;
+
+                statusCell.appendChild(badge);
+
+                row.append(
+                    subjectCell,
+                    marksCell,
+                    progressCell,
+                    statusCell
+                );
+
+                tableBody.appendChild(row);
+            });
+
+
+            // ==================================
+            // STUDY HABITS
+            // ==================================
+
+            document.getElementById("studyHours").textContent =
+                formatNumber(result.study_hours) + " Hours";
+
+            document.getElementById("sleepHours").textContent =
+                formatNumber(result.sleep_hours) + " Hours";
+
+            document.getElementById("habitAttendance").textContent =
+                formatNumber(attendance) + "%";
+
+            const habitContainer = document.getElementById("habitObservations");
+
+            if (result.habits && result.habits.length > 0) {
+                result.habits.forEach(habit => {
+                    const item = document.createElement("div");
+                    item.className = "habit-observation";
+                    item.textContent = "✓ " + habit;
+                    habitContainer.appendChild(item);
+                });
+            }
+
+
+            // ==================================
+            // RECOMMENDATIONS
+            // ==================================
+
+            const recommendationContainer = document.getElementById("recommendationsList");
+
+            if (result.recommendations && result.recommendations.length > 0) {
+                result.recommendations.forEach(recommendation => {
+                    const item = document.createElement("div");
+                    item.className = "recommendation-item";
+
+                    const icon = document.createElement("span");
+                    icon.className = "recommendation-icon";
+                    icon.textContent = "→";
+
+                    const text = document.createElement("p");
+                    text.textContent = recommendation;
+
+                    item.append(icon, text);
+                    recommendationContainer.appendChild(item);
+                });
+            }
+
+
+            // ==================================
+            // DOWNLOAD CSV REPORT
+            // ==================================
+
+            document.getElementById("downloadButton")
+                .addEventListener("click", function() {
+
+                    const rows = [
+                        ["STUDENT ACADEMIC PERFORMANCE REPORT"],
+                        [],
+                        ["Student Name", result.name],
+                        ["Enrollment Number", result.enrollment],
+                        ["Overall Status", performance.status],
+                        ["Overall Percentage", formatNumber(performance.percentage) + "%"],
+                        ["Total Marks", formatNumber(performance.total) + " / " + performance.maximum],
+                        ["Strongest Subject", performance.strongest],
+                        ["Needs Improvement", performance.weakest],
+                        [],
+                        ["SUBJECT MARKS"],
+                        ["Subject", "Marks (out of 100)"]
+                    ];
+
+                    subjectNames.forEach(subject => {
+                        rows.push([subject, formatNumber(marks[subject])]);
+                    });
+
+                    rows.push(
+                        [],
+                        ["STUDY HABITS & ROUTINE"],
+                        ["Attendance Rate", formatNumber(attendance) + "%"],
+                        ["Daily Study Hours", formatNumber(result.study_hours) + " hours"],
+                        ["Daily Sleep Hours", formatNumber(result.sleep_hours) + " hours"],
+                        []
+                    );
+
+                    if (result.habits && result.habits.length > 0) {
+                        rows.push(["Habit Observations"]);
+                        result.habits.forEach(habit => {
+                            rows.push([habit]);
+                        });
+                        rows.push([]);
+                    }
+
+                    if (result.recommendations && result.recommendations.length > 0) {
+                        rows.push(["Personalized Recommendations"]);
+                        result.recommendations.forEach(item => {
+                            rows.push([item]);
+                        });
+                    }
+
+                    const csvContent = rows.map(row =>
+                        row.map(value =>
+                            `"${String(value ?? "").replace(/"/g, '""')}"`
+                        ).join(",")
+                    ).join("\r\n");
+
+                    const blob = new Blob(
+                        ["\uFEFF" + csvContent],
+                        { type: "text/csv;charset=utf-8;" }
+                    );
+
+                    const url = URL.createObjectURL(blob);
+                    const link = document.createElement("a");
+
+                    const safeName = (result.name || "student").toLowerCase().replace(/[^a-z0-9]/g, "_");
+                    link.href = url;
+                    link.download = `${safeName}_performance_report.csv`;
+
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+
+                    URL.revokeObjectURL(url);
+                });
+
+        }
+
+    </script>
+
+</body>
+
+</html>
