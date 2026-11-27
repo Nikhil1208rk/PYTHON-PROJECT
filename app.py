@@ -222,7 +222,7 @@ class StudentHandler(SimpleHTTPRequestHandler):
                         "Study hours must be between 0 and 24."
                     )
 
-                if not 0 <= sleep_hours <= 24:
+                if not 0 <= sleep_hours <= 24-study_hours:
                     raise ValueError(
                         "Sleep hours must be between 0 and 24."
                     )
