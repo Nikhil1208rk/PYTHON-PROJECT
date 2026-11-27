@@ -2,8 +2,6 @@
 from http.server import HTTPServer, SimpleHTTPRequestHandler
 import json
 import os
-import csv
-import io
 from urllib.parse import urlparse
 
 
